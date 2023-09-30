@@ -4,6 +4,7 @@ const Navbar = () => {
   return (
     <div>
       Navbar by prashant
+      Navbar by praman
     </div>
   )
 }
