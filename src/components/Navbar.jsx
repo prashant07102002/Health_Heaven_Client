@@ -5,6 +5,7 @@ const Navbar = () => {
     <div>
       Home | About Us | Help
       Changes by Praman
+
     </div>
   )
 }
