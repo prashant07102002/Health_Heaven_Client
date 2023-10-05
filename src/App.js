@@ -1,8 +1,10 @@
 import Navbar from "./components/Navbar";
+import GymSearch from "./scenes/GymSearch";
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      {/* <Navbar /> */}
+      <GymSearch />
     </div>
   );
 }
