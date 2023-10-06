@@ -67,7 +67,7 @@ const GymSearch = () => {
                     </div>
                 )
             })
-        }    
+        }
     </div>
     </>
   )
