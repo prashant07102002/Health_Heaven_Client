@@ -1,60 +1,189 @@
-import React from 'react';
+import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import { makeStyles } from '@mui/styles';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
+import HomeIcon from '@mui/icons-material/Home';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PersonIcon from '@mui/icons-material/Person';
+import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
 
-// Define custom styles
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  appBar: {
-    backgroundColor: '#333', // Change the background color
-  },
-  title: {
-    flexGrow: 1,
-  }
-}));
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const Navbar = () => {
-  const classes = useStyles();
+function ResponsiveAppBar() {
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            className={classes.menuButton}
+    <AppBar position="static" sx={{backgroundColor: 'black'}}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="#app-bar-with-responsive-menu"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            HealthHeaven
+            HEALTH HEAVEN
           </Typography>
-          <Button color="inherit" className={classes.navButton}>
-            Home
-          </Button>
-          <Button color="inherit" className={classes.navButton}>
-            About
-          </Button>
-          <Button color="inherit" className={classes.navButton}>
-            Services
-          </Button>
-          <Button color="inherit" className={classes.navButton}>
-            Contact
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
-};
 
-export default Navbar;
+          {/* Nav Items For NonMobileScreens */}
+          
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex' }, justifyContent: 'flex-start', gap: '2rem' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                padding: '0.5rem 1rem',
+                ml: '5rem',
+                '&:hover':{
+                  backgroundColor: '#1b1b1b',
+                  cursor: 'pointer'
+                },
+                borderRadius: '0.25rem'
+              }}
+            >
+                <HomeIcon />
+                <Typography sx={{ml: '0.25rem'}}>
+                  Home
+                </Typography>
+            </Box>
+
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                padding: '0.5rem 1rem',
+                '&:hover':{
+                  backgroundColor: '#1b1b1b',
+                  cursor: 'pointer'
+                },
+                borderRadius: '0.25rem'
+              }}
+            >
+                <EmojiPeopleIcon />
+                <Typography sx={{ml: '0.25rem'}}>
+                  About Us
+                </Typography>
+            </Box>
+
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                padding: '0.5rem 1rem',
+                '&:hover':{
+                  backgroundColor: '#1b1b1b',
+                  cursor: 'pointer'
+                },
+                borderRadius: '0.25rem'
+              }}
+            >
+                <HomeRepairServiceIcon />
+                <Typography sx={{ml: '0.25rem'}}>
+                  Services
+                </Typography>
+            </Box>
+
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                padding: '0.5rem 1rem',
+                '&:hover':{
+                  backgroundColor: '#1b1b1b',
+                  cursor: 'pointer'
+                },
+                borderRadius: '0.25rem'
+              }}
+            >
+                <PersonIcon />
+                <Typography sx={{ml: '0.25rem'}}>
+                  Account
+                </Typography>
+            </Box>
+          </Box>
+
+          <Box>
+            <Typography>
+              Praman Singh Tomar
+            </Typography>
+          </Box>
+
+          {/* <Box
+              sx={{
+                display: 'flex',
+                backgroundColor: '#333333',
+                flexDirection: 'row',
+                padding: '0.5rem 1rem',
+                '&:hover':{
+                  cursor: 'pointer'
+                },
+                borderRadius: '0.25rem',
+                ml: '1rem'
+              }}
+            >
+              <LogoutIcon />
+              <Typography sx={{ml: '0.25rem'}}>
+                Logout
+              </Typography>
+          </Box> */}
+          
+          <Box sx={{ flexGrow: 0, ml: '1rem' }}> 
+            <Tooltip title="Open settings" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <AccountCircleIcon />
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
+}
+export default ResponsiveAppBar;
