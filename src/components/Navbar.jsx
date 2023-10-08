@@ -2,11 +2,9 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
@@ -15,11 +13,16 @@ import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonIcon from '@mui/icons-material/Person';
 import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Divider } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
+  const navigate = useNavigate();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [services, setServices] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -28,6 +31,14 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleOpenServiceMenu = (e) => {
+    setServices(e.currentTarget);
+  }
+
+  const handleCloseServiceMenu = () => {
+    setServices(null);
+  }
 
   return (
     <AppBar position="static" sx={{backgroundColor: 'black'}}>
@@ -48,6 +59,7 @@ function ResponsiveAppBar() {
               color: 'inherit',
               textDecoration: 'none',
             }}
+            onClick={() => navigate('/')}
           >
             HEALTH HEAVEN
           </Typography>
@@ -67,6 +79,7 @@ function ResponsiveAppBar() {
                 },
                 borderRadius: '0.25rem'
               }}
+              onClick = {() => navigate('/')}
             >
                 <HomeIcon />
                 <Typography sx={{ml: '0.25rem'}}>
@@ -85,6 +98,7 @@ function ResponsiveAppBar() {
                 },
                 borderRadius: '0.25rem'
               }}
+              onClick = {() => navigate('/about')}
             >
                 <EmojiPeopleIcon />
                 <Typography sx={{ml: '0.25rem'}}>
@@ -92,8 +106,9 @@ function ResponsiveAppBar() {
                 </Typography>
             </Box>
 
-            <Box
-              sx={{
+            {/* Expanded Services */}
+            <Box onClick={handleOpenServiceMenu} 
+              sx={{ 
                 display: 'flex',
                 flexDirection: 'row',
                 padding: '0.5rem 1rem',
@@ -102,13 +117,45 @@ function ResponsiveAppBar() {
                   cursor: 'pointer'
                 },
                 borderRadius: '0.25rem'
-              }}
-            >
-                <HomeRepairServiceIcon />
-                <Typography sx={{ml: '0.25rem'}}>
-                  Services
-                </Typography>
+              }}>
+              <HomeRepairServiceIcon />
+              <Typography sx={{m: '0 0.25rem'}}>
+                Services
+              </Typography>
+              <ExpandMoreIcon />
             </Box>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={services}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(services)}
+              onClose={handleCloseServiceMenu}
+            >
+                <MenuItem onClick={() => navigate('/findGyms')} >
+                  <Typography textAlign="center">Find Gyms</Typography>
+                </MenuItem>
+                <Divider />
+                <MenuItem onClick={() => navigate('/store')}>
+                  <Typography textAlign="center">Buy Suppliments</Typography>
+                </MenuItem>
+                <Divider />
+                <MenuItem onClick={() => navigate('/planDiet')}>
+                  <Typography textAlign="center">Diet Planner</Typography>
+                </MenuItem>
+                <Divider />
+                <MenuItem onClick={() => navigate('/resources')}>
+                  <Typography textAlign="center">Excercise Resources</Typography>
+                </MenuItem>
+            </Menu>
 
             <Box
               sx={{
@@ -134,25 +181,6 @@ function ResponsiveAppBar() {
               Praman Singh Tomar
             </Typography>
           </Box>
-
-          {/* <Box
-              sx={{
-                display: 'flex',
-                backgroundColor: '#333333',
-                flexDirection: 'row',
-                padding: '0.5rem 1rem',
-                '&:hover':{
-                  cursor: 'pointer'
-                },
-                borderRadius: '0.25rem',
-                ml: '1rem'
-              }}
-            >
-              <LogoutIcon />
-              <Typography sx={{ml: '0.25rem'}}>
-                Logout
-              </Typography>
-          </Box> */}
           
           <Box sx={{ flexGrow: 0, ml: '1rem' }}> 
             <Tooltip title="Open settings" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
