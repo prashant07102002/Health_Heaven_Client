@@ -1,14 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../components/Navbar';
+import imageUrl from '../Assets/home_gif.gif';
+import { axiosClient } from '../Utils/axiosClient';
 import homeGif1 from '../Assets/girl-running-on-treadmill.gif';
 import homeGif2 from '../Assets/man-lifting-barbell.gif';
 import { Box, Grid, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-
-
 const Home = () => {
+  useEffect(()=>{
+    fetchData();
+  },[]);
+  async function fetchData(){
+    const response=await axiosClient.get('/getdata/userdata');
+    console.log("the respones is" ,response);
+  }
   const theme = useTheme();
   const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -21,7 +28,6 @@ const Home = () => {
   const images = [
     homeGif1, homeGif2
   ];
-
   return (
     <>
     <Navbar />
