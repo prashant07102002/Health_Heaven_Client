@@ -14,8 +14,10 @@ axiosClient.interceptors.request.use(
 )
 axiosClient.interceptors.response.use(
     async (response) => {
+
         const data = response.data;
         if (data.status === 'Ok') {
+            console.log("Every thing is ok no need to call refresh api, returning data")
             return data;
         }
         const originalrequest = response.config;
@@ -26,8 +28,10 @@ axiosClient.interceptors.response.use(
             window.location.replace('/login', '_self');
             return Promise.reject(error);
         }
-        if (statusCode === 401) {
-            const response = await axiosClient.get('/auth/refreshToken');
+        if (statusCode === 401 && originalrequest._retry) {
+            originalrequest._retry = true;
+            console.log("now the access token expired calling refreshtoken api");
+            const response = await axios.create({ withCredentials: true }).get('/auth/refreshToken');
             if (response.status === 'Ok') {
                 setItem(KEY_ACCESS_TOKEN, response.result.accessToken);
                 originalrequest.headers['Authorization'] = `Bearer ${response.result.accessToken}`;

@@ -12,13 +12,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { axiosClient } from '../Utils/axiosClient';
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        HealthHeaven
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -31,13 +32,30 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
+    const email=data.get('email');
+    const password=data.get('password');
+    const firstName=data.get('firstName');
+    const lastName=data.get('lastName');
+    try {
+      const response=await axiosClient.post(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/signup`,{
+        email,
+        password,
+        firstName,
+        lastName,
+      })
+      console.log("response from sign up ",response);
+    } catch (e) {
+        console.log("the error is ",e);
+    }
+    
+
   };
 
   return (
