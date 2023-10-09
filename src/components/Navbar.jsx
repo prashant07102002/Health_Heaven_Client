@@ -140,19 +140,19 @@ function ResponsiveAppBar() {
               open={Boolean(services)}
               onClose={handleCloseServiceMenu}
             >
-                <MenuItem onClick={() => navigate('/findGyms')} >
+                <MenuItem onClick={() => navigate('/services/findGyms')} >
                   <Typography textAlign="center">Find Gyms</Typography>
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={() => navigate('/store')}>
+                <MenuItem onClick={() => navigate('/services/store')}>
                   <Typography textAlign="center">Buy Suppliments</Typography>
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={() => navigate('/planDiet')}>
+                <MenuItem onClick={() => navigate('/services/dietPlanner')}>
                   <Typography textAlign="center">Diet Planner</Typography>
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={() => navigate('/resources')}>
+                <MenuItem onClick={() => navigate('/services/resources')}>
                   <Typography textAlign="center">Excercise Resources</Typography>
                 </MenuItem>
             </Menu>

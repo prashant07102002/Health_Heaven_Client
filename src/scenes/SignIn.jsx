@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {axiosClient} from '../Utils/axiosClient';
+import { KEY_ACCESS_TOKEN, setItem } from '../Utils/localStorage';
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -32,7 +34,9 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+  const navigate=useNavigate();
     const handleSubmit = async (event) => { // Note the async keyword here
+      
       event.preventDefault();
       const data = new FormData(event.currentTarget);
       console.log({
@@ -43,12 +47,13 @@ export default function SignIn() {
       const password = data.get('password');
       
       try {
-        const result = await axiosClient.post("/auth/login", {
+        const response = await axiosClient.post("/auth/login", {
           email,
           password
         });
-
-        console.log(result); // Assuming your server sends back data upon successful login
+        console.log("response after sign in",response)
+        setItem(KEY_ACCESS_TOKEN,response.result.accessToken);
+        navigate('/');
       } catch (error) {
         console.error('Error:', error);
       }

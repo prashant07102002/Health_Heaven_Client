@@ -62,12 +62,12 @@ const GymSearch = () => {
 
   const findGyms = async () => {
     try {
-        const res = await fetch('http://localhost:5001/gym/findGyms',
+        const res = await fetch('http://localhost:8000/services/findGyms',
         {
           method: 'GET',
-          headers: {
+          body: JSON.stringify({
             query: address
-          }
+          })
         });
         const { results } = await res.json();
         setGymList(results);
