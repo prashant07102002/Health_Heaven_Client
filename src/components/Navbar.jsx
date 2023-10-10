@@ -14,15 +14,21 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonIcon from '@mui/icons-material/Person';
 import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Divider } from '@mui/material';
+import { Button, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import { KEY_ACCESS_TOKEN, removeItem } from '../Utils/localStorage';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLogout } from '../state';
 
 function ResponsiveAppBar() {
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [services, setServices] = React.useState(null);
+  
+  const [loggedInUser, setLoggedInUser] = React.useState(useSelector((store) => store.user));
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -38,6 +44,12 @@ function ResponsiveAppBar() {
 
   const handleCloseServiceMenu = () => {
     setServices(null);
+  }
+
+  const handleLogout = () => {
+    removeItem(KEY_ACCESS_TOKEN);
+    dispatch(setLogout());
+    setLoggedInUser(null);
   }
 
   return (
@@ -176,39 +188,50 @@ function ResponsiveAppBar() {
             </Box>
           </Box>
 
-          <Box>
-            <Typography>
-              Praman Singh Tomar
-            </Typography>
-          </Box>
-          
-          <Box sx={{ flexGrow: 0, ml: '1rem' }}> 
-            <Tooltip title="Open settings" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <AccountCircleIcon />
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          {
+            loggedInUser ? (
+              <>
+              <Box>
+                <Typography>
+                  {`${loggedInUser.firstName} ${loggedInUser.lastName}`}
+                </Typography>
+              </Box>
+              
+              <Box sx={{ flexGrow: 0, ml: '1rem' }}> 
+                <Tooltip title="Open settings" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <AccountCircleIcon />
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">Profile</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>
+                    <Typography textAlign="center">Logout</Typography>
+                  </MenuItem>
+                </Menu>
+              </Box>
+            </>
+            ) : (
+              <>
+              <Button variant="contained" onClick={() => navigate(`/signup`)}>Signup</Button>
+              </>
+            )
+          }
         </Toolbar>
       </Container>
     </AppBar>
