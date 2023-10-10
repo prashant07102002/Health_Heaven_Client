@@ -5,6 +5,7 @@ import SignIn from "./scenes/SignIn";
 import SignUp from "./scenes/SignUp";
 import RequireUser from "./components/RequireUser";
 import DietPlanner from "./scenes/DietPlanner";
+
 function App() {
   return (
     <div className="App">

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -11,64 +10,64 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {axiosClient} from '../Utils/axiosClient';
 import { KEY_ACCESS_TOKEN, setItem } from '../Utils/localStorage';
 import { useNavigate } from 'react-router-dom';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        HealthHeaven
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
-const defaultTheme = createTheme();
+import { useDispatch } from 'react-redux';
+import { setLogin } from '../state';
+import { Paper } from '@mui/material';
 
 export default function SignIn() {
   const navigate=useNavigate();
-    const handleSubmit = async (event) => { // Note the async keyword here
-      
-      event.preventDefault();
-      const data = new FormData(event.currentTarget);
-      console.log({
-        email: data.get('email'),
-        password: data.get('password'),
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (event) => { // Note the async keyword here
+    
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
+    const email = data.get('email');
+    const password = data.get('password');
+    
+    try {
+      const response = await axiosClient.post("/auth/login", {
+        email,
+        password
       });
-      const email = data.get('email');
-      const password = data.get('password');
+      console.log("response after sign in",response);
+      console.log(response);
+      dispatch(setLogin({
+        user: response.result.user
+      }));
+      setItem(KEY_ACCESS_TOKEN,response.result.accessToken);
       
-      try {
-        const response = await axiosClient.post("/auth/login", {
-          email,
-          password
-        });
-        console.log("response after sign in",response)
-        setItem(KEY_ACCESS_TOKEN,response.result.accessToken);
-        navigate('/');
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
+      navigate('/');
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
+      <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+      >
+        <Paper elevation={5}
           sx={{
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            maxWidth: '600px',
+            backgroundColor: 'white',
+            padding: '2rem 2rem'
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -117,15 +116,13 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signUp" variant="body2">
+                <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
             </Grid>
           </Box>
-        </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        </Paper>
       </Container>
-    </ThemeProvider>
   );
 }

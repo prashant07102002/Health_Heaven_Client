@@ -40,7 +40,7 @@ const GymSearch = () => {
                 "<a href=\"https://maps.google.com/maps/contrib/107329173698105199329\">A Google User</a>"
             ],
             "photo_reference": "ATJ83zgsvQpIO581J_uTMN2YIiIWmMRlzyARUNyVevuJQP8iqRrxvws4KGijDjEJ1eqAo_GIPWBCrzpBLPj8mVwErPv8N3d-_-Xu83rfu7Mwo8OODev2hq6uP0rLBwZ7MZoNHRmSitYsG2tmL8z0YlmgaKKk6ZbojTUo-OT5u4KIGQ79xUJg",
-            "width": 4128
+            "width": 2322
         }
     ],
     "place_id": "ChIJpSdFx139YjkRm-Oc5rQcEvI",
