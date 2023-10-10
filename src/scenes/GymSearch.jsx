@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import geolocation from 'geolocation';
 import Navbar from '../components/Navbar';
-import { Box, Container, Divider, IconButton, InputBase, Paper } from '@mui/material';
+import { Box, Button, Container, Divider, IconButton, InputBase, Paper, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import EditLocationIcon from '@mui/icons-material/EditLocation';
-import DirectionsIcon from '@mui/icons-material/Directions';
+import gymImage from '../Assets/post3.jpg';
+import FlexBetween from '../components/FlexBetween';
 
 const GymSearch = () => {
   const [gymList, setGymList] = useState([{
@@ -149,10 +150,45 @@ const GymSearch = () => {
               <Paper key={i} elevation={3}
               sx={{
                 width: '100%',
-                height: '200px'
+                height: '200px',
+                display: 'flex',
+                gap: '2rem'
               }}
               >
-                
+                <Box
+                  component="img"
+                  sx={{
+                    display: 'block',
+                    overflow: 'hidden',
+                    maxWidth: '400px',
+                    objectFit: 'cover',
+                    margin: '0.5rem'
+                  }}
+                  src={gymImage}
+                  alt='img'
+                />
+                <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '1rem'
+                }}>
+                  <Typography variant='h4'>
+                    {gym.name}
+                  </Typography>
+                  <Typography variant='h7'>
+                    {gym.formatted_address}
+                  </Typography>
+                  <Typography>
+                    Place Status: {gym.business_status}
+                    <br/>
+                    {gym.opening_hours.open_now ? (
+                        'Open Now'
+                    ) : (
+                        "Currently Closed"
+                    )}
+                  </Typography>
+                </Box>
               </Paper>
             )
           })
@@ -161,36 +197,6 @@ const GymSearch = () => {
         )
       }
     </Container>
-
-    {/* <Container sx={{
-      backgroundColor: 'white'
-    }}>
-      <InputBase
-        sx={{ ml: 1, flex: 1, backgroundColor: 'gray' }}
-        placeholder="Search Google Maps"
-        inputProps={{ 'aria-label': 'search google maps' }}
-      />
-      <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-        <SearchIcon />
-      </IconButton>
-    </Container>
-    <div id='map'></div>
-    <input type='text' placeholder='ENTER LOCATION' id='autocomplete' onChange={(e) => setAddress(e.target.value)} />
-    or
-    <button onClick={getGeolocation}>Locate me</button>
-    <br />
-    <button onClick={findGyms}>Get Gyms</button>
-    <div>
-        {
-            gymList.map((elm, i) => {
-                return (
-                    <div key={i} style={{padding: '10px'}}>
-                        {elm.name}
-                    </div>
-                )
-            })
-        }
-    </div> */}
     </>
   )
 }
