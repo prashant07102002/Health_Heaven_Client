@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import { Box, Button, Container, Divider, Icon, IconButton, InputBase, Paper, Rating, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import EditLocationIcon from '@mui/icons-material/EditLocation';
-import gymImage from '../Assets/post3.jpg';
+import gymImage from '../Assets/gym_demo_img.jpg';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import StarIcon from '@mui/icons-material/Star';
 import GpsFixedIcon from '@mui/icons-material/GpsFixed';
