@@ -1,73 +1,46 @@
 import React, { useState } from 'react'
 import geolocation from 'geolocation';
 import Navbar from '../components/Navbar';
-import { Box, Container, Divider, IconButton, InputBase, Paper } from '@mui/material';
+import { Box, Button, Container, Divider, Icon, IconButton, InputBase, Paper, Rating, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import EditLocationIcon from '@mui/icons-material/EditLocation';
+import gymImage from '../Assets/gym_demo_img.jpg';
 import DirectionsIcon from '@mui/icons-material/Directions';
+import StarIcon from '@mui/icons-material/Star';
+import GpsFixedIcon from '@mui/icons-material/GpsFixed';
+
+const labels = {
+  0: 'Useless',
+  1: 'Poor',
+  2: 'Ok',
+  3: 'Good',
+  4: 'Excellent',
+  5: 'Best In Class'
+};
 
 const GymSearch = () => {
-  const [gymList, setGymList] = useState([{
-    "business_status": "OPERATIONAL",
-    "formatted_address": "28/1, Patnipura Chauraha, HIG Main Rd, Nanda Nagar, Indore, Madhya Pradesh 452011, India",
-    "geometry": {
-        "location": {
-            "lat": 22.7413867,
-            "lng": 75.8784912
-        },
-        "viewport": {
-            "northeast": {
-                "lat": 22.74270562989272,
-                "lng": 75.87982032989272
-            },
-            "southwest": {
-                "lat": 22.74000597010728,
-                "lng": 75.87712067010727
-            }
-        }
-    },
-    "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
-    "icon_background_color": "#7B9EB0",
-    "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
-    "name": "AiSh Zumba Classes",
-    "opening_hours": {
-        "open_now": false
-    },
-    "photos": [
-        {
-            "height": 2322,
-            "html_attributions": [
-                "<a href=\"https://maps.google.com/maps/contrib/107329173698105199329\">A Google User</a>"
-            ],
-            "photo_reference": "ATJ83zgsvQpIO581J_uTMN2YIiIWmMRlzyARUNyVevuJQP8iqRrxvws4KGijDjEJ1eqAo_GIPWBCrzpBLPj8mVwErPv8N3d-_-Xu83rfu7Mwo8OODev2hq6uP0rLBwZ7MZoNHRmSitYsG2tmL8z0YlmgaKKk6ZbojTUo-OT5u4KIGQ79xUJg",
-            "width": 2322
-        }
-    ],
-    "place_id": "ChIJpSdFx139YjkRm-Oc5rQcEvI",
-    "plus_code": {
-        "compound_code": "PVRH+HC Indore, Madhya Pradesh",
-        "global_code": "7JJQPVRH+HC"
-    },
-    "rating": 4.1,
-    "reference": "ChIJpSdFx139YjkRm-Oc5rQcEvI",
-    "types": [
-        "gym",
-        "health",
-        "point_of_interest",
-        "establishment"
-    ],
-    "user_ratings_total": 19
-}]);
+  const [gymList, setGymList] = useState([]);
   const [address, setAddress] = useState("");
+
+  const getMapsLink = (str) => {
+    let link = "";
+    for(let i=0;i<str.length;i++){
+      if(str[i] === '"'){
+        i++;
+        while(str[i] !== '"') {
+          link += str[i];
+          i++;
+        }
+      }
+    }
+    return link;
+  }
 
   const findGyms = async () => {
     try {
-        const res = await fetch('http://localhost:8000/services/findGyms',
+        const res = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/gym/findGyms?query=${address}`,
         {
-          method: 'GET',
-          body: JSON.stringify({
-            query: address
-          })
+          method: 'GET'
         });
         const { results } = await res.json();
         setGymList(results);
@@ -80,7 +53,7 @@ const GymSearch = () => {
 
   const getNearbyGyms = async (position) => {
     try {
-      const res = await fetch('http://localhost:5001/gym/nearbyGyms',
+      const res = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/gym/nearbyGyms`,
       {
         method: 'GET',
         headers: {
@@ -99,8 +72,7 @@ const GymSearch = () => {
 
   const getGeolocation = () => {
     geolocation.getCurrentPosition((err, position) => {
-      if (err) throw err
-      console.log(position);
+      if (err) window.alert('Please Allow Location Access');
       getNearbyGyms(position);
     })
   }
@@ -111,6 +83,8 @@ const GymSearch = () => {
 
     <Container
       sx={{
+        display: 'flex',
+        justifyContent: 'center',
         alignItems: 'center',
         p: '2rem 5rem'
       }}
@@ -118,7 +92,7 @@ const GymSearch = () => {
       <Paper
         component="form"
         elevation={3}
-        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '100%'}}
+        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '100%', maxWidth: '850px'}}
       >
         <IconButton sx={{ p: '10px' }} aria-label="menu">
           <EditLocationIcon />
@@ -128,16 +102,26 @@ const GymSearch = () => {
           sx={{ ml: 1, flex: 1 }}
           placeholder="Search Gyms Near"
           inputProps={{ 'aria-label': 'Search Gyms Near' }}
+          onChange={(e) => setAddress(e.target.value)}
+          value={address}
         />
-        <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-        <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+        <IconButton type="button" sx={{ p: '10px' }} aria-label="search" onClick={findGyms}>
           <SearchIcon />
         </IconButton>
+        <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+        <Button color='secondary' onClick={getGeolocation}>
+          <GpsFixedIcon sx={{mr: '0.5rem'}}/>
+          Near Me
+        </Button>
       </Paper>
     </Container>
 
     <Container
     sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '2rem',
+      justifyContent: 'center',
       alignItems: 'center',
       p: '2rem 5rem'
     }}
@@ -149,10 +133,73 @@ const GymSearch = () => {
               <Paper key={i} elevation={3}
               sx={{
                 width: '100%',
-                height: '200px'
+                maxWidth: '850px',
+                display: 'flex',
+                gap: '2rem',
+                padding: '0.7rem'
               }}
               >
-                
+                <Box
+                  component="img"
+                  sx={{
+                    display: 'block',
+                    overflow: 'hidden',
+                    maxWidth: '150px',
+                    objectFit: 'cover'
+                  }}
+                  src={gymImage}
+                  alt='img'
+                />
+                <Box
+                sx={{
+                  display: 'flex',
+                  width: '100%',
+                  flexDirection: 'column',
+                  gap: '0.75rem'
+                }}>
+                  <Typography variant='h4'>
+                    {gym.name}
+                  </Typography>
+                  <Typography variant='h7'>
+                    {gym.formatted_address || gym.vicinity}
+                  </Typography>
+                  <Box>
+                    Place Status: {gym.business_status}
+                    <br/>
+                    {gym.opening_hours && gym.opening_hours.open_now ? (
+                        <Typography sx={{color: 'green'}}>
+                          Open Now
+                        </Typography>
+                    ) : (
+                        <Typography sx={{color: 'Red'}}>
+                          Currently Closed
+                        </Typography>
+                    )}
+                  </Box>
+                  <Box sx={{display: 'flex', marginTop: 'auto'}}>
+                    <Typography>Rating: </Typography>
+                    <Rating
+                      name="gym-feedback"
+                      value={gym.rating}
+                      readOnly
+                      precision={0.1}
+                      emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                    />
+                    <Typography sx={{ display: 'inline' }}>{`(${gym.user_ratings_total}) `}{labels[Math.round(gym.rating)]}</Typography>
+                    {
+                      gym.photos && gym.photos[0].html_attributions ? (
+                        <a href={getMapsLink(gym.photos[0].html_attributions[0])} rel="noreferrer" target='_blank' style={{marginLeft: 'auto'}}>
+                        <Button>
+                          Directions 
+                          <DirectionsIcon sx={{pl: '0.25rem'}} />
+                        </Button>
+                        </a>
+                      ) : (
+                        null
+                      )
+                    }
+                  </Box>
+                </Box>
               </Paper>
             )
           })
@@ -161,36 +208,6 @@ const GymSearch = () => {
         )
       }
     </Container>
-
-    {/* <Container sx={{
-      backgroundColor: 'white'
-    }}>
-      <InputBase
-        sx={{ ml: 1, flex: 1, backgroundColor: 'gray' }}
-        placeholder="Search Google Maps"
-        inputProps={{ 'aria-label': 'search google maps' }}
-      />
-      <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-        <SearchIcon />
-      </IconButton>
-    </Container>
-    <div id='map'></div>
-    <input type='text' placeholder='ENTER LOCATION' id='autocomplete' onChange={(e) => setAddress(e.target.value)} />
-    or
-    <button onClick={getGeolocation}>Locate me</button>
-    <br />
-    <button onClick={findGyms}>Get Gyms</button>
-    <div>
-        {
-            gymList.map((elm, i) => {
-                return (
-                    <div key={i} style={{padding: '10px'}}>
-                        {elm.name}
-                    </div>
-                )
-            })
-        }
-    </div> */}
     </>
   )
 }
