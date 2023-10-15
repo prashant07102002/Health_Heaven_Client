@@ -38,12 +38,10 @@ export default function SignIn() {
         password
       });
       console.log("response after sign in",response);
-      console.log(response);
       dispatch(setLogin({
         user: response.result.user
       }));
       setItem(KEY_ACCESS_TOKEN,response.result.accessToken);
-      
       navigate('/');
     } catch (error) {
       console.error('Error:', error);
