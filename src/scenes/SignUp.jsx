@@ -1,74 +1,86 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { axiosClient } from '../Utils/axiosClient';
-import { Paper } from '@mui/material';
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { axiosClient } from "../Utils/axiosClient";
+import { Paper } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = async(event) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+      email: data.get("email"),
+      password: data.get("password"),
     });
-    const email=data.get('email');
-    const password=data.get('password');
-    const firstName=data.get('firstName');
-    const lastName=data.get('lastName');
+    const email = data.get("email");
+    const password = data.get("password");
+    const firstName = data.get("firstName");
+    const lastName = data.get("lastName");
     try {
-      const response=await axiosClient.post(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/signup`,{
-        email,
-        password,
-        firstName,
-        lastName,
-      })
-      console.log("response from sign up ",response);
+      const response = await axiosClient.post(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/auth/signup`,
+        {
+          email,
+          password,
+          firstName,
+          lastName,
+        }
+      );
+      console.log("response from sign up ", response);
+      navigate("/signin");
     } catch (e) {
-        console.log("the error is ",e);
+      console.log("the error is ", e);
     }
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container 
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
+      <Container
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
-        <Paper elevation={5}
+        <Paper
+          elevation={5}
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            bgcolor: 'white',
-            p: '2rem 3rem',
-            maxWidth: '550px'
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            bgcolor: "white",
+            p: "2rem 3rem",
+            maxWidth: "550px",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -114,7 +126,9 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  control={
+                    <Checkbox value="allowExtraEmails" color="primary" />
+                  }
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
