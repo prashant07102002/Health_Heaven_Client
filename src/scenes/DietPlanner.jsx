@@ -8,7 +8,6 @@ import {
   CardContent,
   Typography,
   TextField,
-  Checkbox,
   FormControlLabel,
   Paper,
   Stack,
@@ -20,6 +19,7 @@ import axios from "axios";
 import Meal from "../components/Meal";
 import ResponsiveAppBar from "../components/Navbar";
 import CalorieCalculator from "../components/CalorieCalculator";
+import { axiosClient } from "../Utils/axiosClient";
 
 const style = {
   position: "absolute",
@@ -49,7 +49,6 @@ function DietPlanner() {
     fat: 0,
     carbohydates: 0,
   });
-  console.log("value of checked : ", checked);
   function handleChange(event) {
     setCalorie(event.target.value);
   }
@@ -71,8 +70,9 @@ function DietPlanner() {
       }&timeFrame=day&targetCalories=${calorie}&${
         checked ? "diet=vegetarian" : ""
       }`;
-      console.log("api called : ", apiUrl);
+      console.log("api is ", apiUrl);
       const response = await axios.get(apiUrl);
+      console.log(response.data);
       setMeal(response.data.meals);
       const nutrients = response.data.nutrients;
       setNutrient({

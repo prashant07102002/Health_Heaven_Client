@@ -14,19 +14,48 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { axiosClient } from "../Utils/axiosClient";
 import { Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const defaultTheme = createTheme();
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const [email, setEmail] = React.useState("");
+  const [generatedOtp, setGeneratedOtp] = React.useState(0);
+  const [enteredOtp, setEnteredOtp] = React.useState("");
+
+  const handleChange = async (event) => {
+    event.preventDefault();
+    setEmail(event.target.value);
+  };
+  const handleEnteredOtp = async (event) => {
+    event.preventDefault();
+    setEnteredOtp(event.target.value);
+  };
+  const handleGenerateOtp = async (event) => {
+    event.preventDefault();
+    console.log(email);
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/auth/getotp`,
+        {
+          email,
+        }
+      );
+      console.log(response);
+      setGeneratedOtp(response.data.result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-    const email = data.get("email");
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
     const password = data.get("password");
     const firstName = data.get("firstName");
     const lastName = data.get("lastName");
@@ -38,6 +67,8 @@ export default function SignUp() {
           password,
           firstName,
           lastName,
+          generatedOtp,
+          enteredOtp,
         }
       );
       console.log("response from sign up ", response);
@@ -111,6 +142,7 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -123,6 +155,37 @@ export default function SignUp() {
                   id="password"
                   autoComplete="new-password"
                 />
+              </Grid>
+              <Grid
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: 10,
+                }}
+                item
+                xs={12}
+              >
+                <TextField
+                  required
+                  fullWidth
+                  name="otp"
+                  label="OTP"
+                  type="password"
+                  id="otp"
+                  onChange={handleEnteredOtp}
+                />
+                <Button
+                  onClick={handleGenerateOtp}
+                  type="submit"
+                  size="small"
+                  style={{ width: "200px" }}
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 2, mb: 2 }}
+                >
+                  Generate OTP
+                </Button>
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel

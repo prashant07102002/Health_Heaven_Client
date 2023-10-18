@@ -9,12 +9,13 @@ axiosClient.interceptors.request.use(
     async (request) => {
         const accessToken = getItem(KEY_ACCESS_TOKEN);
         request.headers['Authorization'] = `Bearer ${accessToken}`;
+        console.log(request);
         return request;
     }
 )
 axiosClient.interceptors.response.use(
     async (response) => {
-
+        // console.log("response is ", response);
         const data = response.data;
         if (data.status === 'Ok') {
             console.log("Every thing is ok no need to call refresh api, returning data")
