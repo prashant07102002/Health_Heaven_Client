@@ -11,7 +11,6 @@ const Home = () => {
   const theme = useTheme();
   const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-
   const [activeStep, setActiveStep] = React.useState(0);
   
   const handleStepChange = (step) => {
