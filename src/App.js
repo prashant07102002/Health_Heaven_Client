@@ -5,6 +5,7 @@ import SignIn from "./scenes/SignIn";
 import SignUp from "./scenes/SignUp";
 import RequireUser from "./components/RequireUser";
 import DietPlanner from "./scenes/DietPlanner";
+import Store from "./scenes/Store";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route element={<RequireUser />}>
           <Route path="/services/findGyms" element={<GymSearch />} />
           <Route path="/services/dietPlanner" element={<DietPlanner />} />
+          <Route path="/services/store" element={<Store />} />
         </Route>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
