@@ -1,22 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
-const url = 'https://www.amazon.in/s?k=gym+supplements';
-
+const url = "https://www.amazon.in/s?k=gym+supplements";
 
 const Store = () => {
-  
-  const getProducts =  () => {
-    
-  }
+  const getProducts = () => {};
 
   useEffect(() => {
     getProducts();
-  })
-  return (
-    <div>
-        
-    </div>
-  )
-}
+  });
+  return <div></div>;
+};
 
 export default Store;
