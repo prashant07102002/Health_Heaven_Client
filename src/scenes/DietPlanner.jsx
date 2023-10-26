@@ -19,7 +19,6 @@ import axios from "axios";
 import Meal from "../components/Meal";
 import ResponsiveAppBar from "../components/Navbar";
 import CalorieCalculator from "../components/CalorieCalculator";
-import { axiosClient } from "../Utils/axiosClient";
 
 const style = {
   position: "absolute",
@@ -82,9 +81,6 @@ function DietPlanner() {
         fat: nutrients.fat,
         carbohydates: nutrients.carbohydrates,
       });
-      // console.log(response.data.meals.length);
-      // console.log("length is ", meal.length);
-      // console.log("the meal array is", meal);
     } catch (error) {
       console.log(error);
     }
