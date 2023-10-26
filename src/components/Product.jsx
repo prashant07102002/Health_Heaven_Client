@@ -74,7 +74,6 @@ const Product = ({ product }) => {
             {labels[Math.round(product.rating)]}
           </Typography>
         </Box>
-
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
         <Link to={product.product_link} target='_blank'>
