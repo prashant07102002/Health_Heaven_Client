@@ -23,10 +23,12 @@ export default function SignUp() {
   const [email, setEmail] = React.useState("");
   const [generatedOtp, setGeneratedOtp] = React.useState(0);
   const [enteredOtp, setEnteredOtp] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
   const handleChange = async (event) => {
     event.preventDefault();
-    setEmail(event.target.value);
+    if (event.target.name === "email") setEmail(event.target.value);
+    else setPassword(event.target.value);
   };
   const handleEnteredOtp = async (event) => {
     event.preventDefault();
@@ -52,11 +54,6 @@ export default function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
-    const password = data.get("password");
     const firstName = data.get("firstName");
     const lastName = data.get("lastName");
     try {
@@ -138,9 +135,15 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
+                  error={
+                    email.includes("@gmail.com") || email.length === 0
+                      ? false
+                      : true
+                  }
                   id="email"
                   label="Email Address"
                   name="email"
+                  type="email"
                   autoComplete="email"
                   onChange={handleChange}
                 />
@@ -149,6 +152,10 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
+                  onChange={handleChange}
+                  error={
+                    password.length >= 8 || password.length === 0 ? false : true
+                  }
                   name="password"
                   label="Password"
                   type="password"

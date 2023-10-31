@@ -4,29 +4,30 @@ import React from "react";
 function ExerciseDetail({ item }) {
   let index = 1;
   return (
-    <div>
-      {/* <img src={`${item.gifUrl}`} alt="" /> */}
-      <div style={{ margin: 20 }}>
+    <>
+      <div style={{ margin: 20, display: "flex", gap: 30 }}>
         <img
-          src="https://v2.exercisedb.io/image/mBLxdOGUeEcqRg"
+          src={`${item.gifUrl}`}
           alt=""
           style={{ border: "1px solid black" }}
         />
-        <div style={{ float: "right", marginRight: 150, marginTop: 80 }}>
+        <div
+          style={{
+            marginRight: 120,
+            marginTop: 80,
+          }}
+        >
           <Typography variant="body1" gutterBottom>
-            <div style={{ fontWeight: "bold" }}> Body Part:</div>{" "}
-            {item.bodyPart}
+            <b>Body Part:</b> {item.bodyPart}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            <div style={{ fontWeight: "bold" }}>Equipment:</div>{" "}
-            {item.equipment}
+            <b>Equipment:</b> {item.equipment}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            <div style={{ fontWeight: "bold" }}>Target Muscle:</div>{" "}
-            {item.target}
+            <b>Target Muscle:</b> {item.target}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            <div style={{ fontWeight: "bold" }}>Secondary Muscles:</div>
+            <b>Secondary Muscles:</b>
             {item.secondaryMuscles.map((item) => {
               return ` ${item} ,`;
             })}
@@ -40,7 +41,7 @@ function ExerciseDetail({ item }) {
           return <Typography key={i}>{`${index++}. ${item}`}</Typography>;
         })}
       </Typography>
-    </div>
+    </>
   );
 }
 

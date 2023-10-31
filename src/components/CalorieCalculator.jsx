@@ -39,6 +39,13 @@ function CalorieCalculator({ setCalorie, handleClose }) {
     setformData({ ...formData, [name]: value });
   };
 
+  function containsOnlyDigits(str) {
+    if (str === "") {
+      return true;
+    }
+    return /^\d+$/.test(str);
+  }
+
   const sendDataToParent = async (event) => {
     event.preventDefault();
     setCalorie(event.target.value);
@@ -60,6 +67,7 @@ function CalorieCalculator({ setCalorie, handleClose }) {
     const age = formData.age;
     const gender = formData.gender;
     const activitylevel = formData.activity;
+
     if (!height || !weight || !age || !gender || !activitylevel) {
       navigate("/services/dietPlanner");
       setallDetail("false");
@@ -113,13 +121,25 @@ function CalorieCalculator({ setCalorie, handleClose }) {
         }}
       >
         <Typography component="h1" variant="h5">
-          Nutirtion Calculator
+          Nutrition Calculator
         </Typography>
         <Box component="form" noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
             fullWidth
+            error={
+              formData.height !== "" &&
+              (!containsOnlyDigits(formData.height) ||
+                !(formData.height >= 130 && formData.height <= 230))
+            }
+            helperText={
+              formData.height !== "" &&
+              (!containsOnlyDigits(formData.height) ||
+                !(formData.height >= 130 && formData.height <= 230))
+                ? `height should be numeric and in range 130-230`
+                : ""
+            }
             id="height"
             label="Height(cm)"
             name="height"
@@ -130,6 +150,18 @@ function CalorieCalculator({ setCalorie, handleClose }) {
           />
           <TextField
             margin="normal"
+            error={
+              formData.weight !== "" &&
+              (!containsOnlyDigits(formData.weight) ||
+                !(formData.weight >= 40 && formData.weight <= 160))
+            }
+            helperText={
+              formData.weight !== "" &&
+              (!containsOnlyDigits(formData.weight) ||
+                !(formData.weight >= 40 && formData.weight <= 160))
+                ? `weight should numeric and in range 40-160`
+                : ""
+            }
             required
             fullWidth
             id="weight"
@@ -142,6 +174,18 @@ function CalorieCalculator({ setCalorie, handleClose }) {
           />
           <TextField
             margin="normal"
+            error={
+              formData.age !== "" &&
+              (!containsOnlyDigits(formData.age) ||
+                !(formData.age > 0 && formData.age <= 80))
+            }
+            helperText={
+              formData.age !== "" &&
+              (!containsOnlyDigits(formData.age) ||
+                !(formData.age > 0 && formData.age <= 80))
+                ? `age should be numeric and in range 0-80`
+                : ""
+            }
             required
             fullWidth
             id="age"
