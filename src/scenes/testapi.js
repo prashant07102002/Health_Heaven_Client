@@ -1,206 +1,187 @@
 const arr = [
   {
-    "bodyPart": "back",
-    "equipment": "cable",
-    "gifUrl": "https://v2.exercisedb.io/image/Bu2SgnoqUawbm4",
-    "id": "0007",
-    "name": "alternate lateral pulldown",
-    "target": "lats",
-    "secondaryMuscles": [
-      "biceps",
-      "rhomboids"
-    ],
-    "instructions": [
-      "Sit on the cable machine with your back straight and feet flat on the ground.",
-      "Grasp the handles with an overhand grip, slightly wider than shoulder-width apart.",
-      "Lean back slightly and pull the handles towards your chest, squeezing your shoulder blades together.",
-      "Pause for a moment at the peak of the movement, then slowly release the handles back to the starting position.",
-      "Repeat for the desired number of repetitions."
-    ]
-  },
-  {
-    "bodyPart": "back",
+    "bodyPart": "waist",
     "equipment": "body weight",
-    "gifUrl": "https://v2.exercisedb.io/image/UA8KVthSeQwBug",
-    "id": "3293",
-    "name": "archer pull up",
-    "target": "lats",
+    "gifUrl": "https://v2.exercisedb.io/image/2BcIk6IiWmlmst",
+    "id": "0001",
+    "name": "3/4 sit-up",
+    "target": "abs",
     "secondaryMuscles": [
-      "biceps",
-      "forearms"
+      "hip flexors",
+      "lower back"
     ],
     "instructions": [
-      "Start by hanging from a pull-up bar with an overhand grip, slightly wider than shoulder-width apart.",
-      "Engage your core and pull your shoulder blades down and back.",
-      "As you pull yourself up, bend one arm and bring your elbow towards your side, while keeping the other arm straight.",
-      "Continue pulling until your chin is above the bar and your bent arm is fully flexed.",
-      "Lower yourself back down with control, straightening the bent arm and repeating the movement on the other side.",
-      "Alternate sides with each repetition."
-    ]
-  },
-  {
-    "bodyPart": "back",
-    "equipment": "leverage machine",
-    "gifUrl": "https://v2.exercisedb.io/image/CCWtIjR7p9VORW",
-    "id": "0015",
-    "name": "assisted parallel close grip pull-up",
-    "target": "lats",
-    "secondaryMuscles": [
-      "biceps",
-      "forearms"
-    ],
-    "instructions": [
-      "Adjust the machine to your desired weight and height.",
-      "Place your hands on the parallel bars with a close grip, palms facing each other.",
-      "Hang from the bars with your arms fully extended and your feet off the ground.",
-      "Engage your back muscles and pull your body up towards the bars, keeping your elbows close to your body.",
-      "Continue pulling until your chin is above the bars.",
-      "Pause for a moment at the top, then slowly lower your body back down to the starting position.",
-      "Repeat for the desired number of repetitions."
-    ]
-  },
-  {
-    "bodyPart": "back",
-    "equipment": "leverage machine",
-    "gifUrl": "https://v2.exercisedb.io/image/dpI33qwaW9FPr2",
-    "id": "0017",
-    "name": "assisted pull-up",
-    "target": "lats",
-    "secondaryMuscles": [
-      "biceps",
-      "forearms"
-    ],
-    "instructions": [
-      "Adjust the machine to your desired weight and height settings.",
-      "Grasp the handles with an overhand grip, slightly wider than shoulder-width apart.",
-      "Hang with your arms fully extended and your feet off the ground.",
-      "Engage your back muscles and pull your body up towards the handles, keeping your elbows close to your body.",
-      "Continue pulling until your chin is above the handles.",
-      "Pause for a moment at the top, then slowly lower your body back down to the starting position.",
-      "Repeat for the desired number of repetitions."
-    ]
-  },
-  {
-    "bodyPart": "back",
-    "equipment": "leverage machine",
-    "gifUrl": "https://v2.exercisedb.io/image/pCv284iVBg4dVB",
-    "id": "1431",
-    "name": "assisted standing chin-up",
-    "target": "lats",
-    "secondaryMuscles": [
-      "biceps",
-      "forearms"
-    ],
-    "instructions": [
-      "Adjust the machine to your desired assistance level.",
-      "Stand on the foot platform and grip the handles with an overhand grip, slightly wider than shoulder-width apart.",
-      "Keep your chest up and shoulders back, engage your core, and slightly bend your knees.",
-      "Pull your body up by flexing your elbows and driving your elbows down towards your sides.",
-      "Continue pulling until your chin is above the bar.",
-      "Pause for a moment at the top, then slowly lower your body back down to the starting position.",
-      "Repeat for the desired number of repetitions."
-    ]
-  },
-  {
-    "bodyPart": "back",
-    "equipment": "leverage machine",
-    "gifUrl": "https://v2.exercisedb.io/image/kXfmotNzayEmOh",
-    "id": "1432",
-    "name": "assisted standing pull-up",
-    "target": "lats",
-    "secondaryMuscles": [
-      "biceps",
-      "forearms"
-    ],
-    "instructions": [
-      "Adjust the machine to your desired weight and height settings.",
-      "Stand facing the machine with your feet shoulder-width apart.",
-      "Grasp the handles with an overhand grip, slightly wider than shoulder-width apart.",
-      "Engage your lats and biceps, and pull yourself up towards the handles.",
-      "Pause for a moment at the top, squeezing your back muscles.",
-      "Slowly lower yourself back down to the starting position.",
-      "Repeat for the desired number of repetitions."
-    ]
-  },
-  {
-    "bodyPart": "back",
-    "equipment": "stability ball",
-    "gifUrl": "https://v2.exercisedb.io/image/7i5b0nM4iQpVUa",
-    "id": "1314",
-    "name": "back extension on exercise ball",
-    "target": "spine",
-    "secondaryMuscles": [
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Place the stability ball on the ground and lie face down on top of it, with your hips resting on the ball and your feet against a wall or other stable surface.",
-      "Position your hands behind your head or crossed over your chest.",
-      "Engage your core and slowly lift your upper body off the ball, extending your back until your body forms a straight line from your head to your heels.",
+      "Lie flat on your back with your knees bent and feet flat on the ground.",
+      "Place your hands behind your head with your elbows pointing outwards.",
+      "Engaging your abs, slowly lift your upper body off the ground, curling forward until your torso is at a 45-degree angle.",
       "Pause for a moment at the top, then slowly lower your upper body back down to the starting position.",
       "Repeat for the desired number of repetitions."
     ]
   },
   {
-    "bodyPart": "back",
+    "bodyPart": "waist",
     "equipment": "body weight",
-    "gifUrl": "https://v2.exercisedb.io/image/5ty0UwrYJXWlYr",
-    "id": "3297",
-    "name": "back lever",
-    "target": "upper back",
+    "gifUrl": "https://v2.exercisedb.io/image/H3GzgfsZvy-P22",
+    "id": "0002",
+    "name": "45° side bend",
+    "target": "abs",
     "secondaryMuscles": [
-      "biceps",
-      "forearms",
-      "core"
+      "obliques"
     ],
     "instructions": [
-      "Start by hanging from a pull-up bar with an overhand grip, hands slightly wider than shoulder-width apart.",
-      "Engage your core and pull your shoulder blades down and back.",
-      "Bend your knees and tuck them towards your chest.",
-      "Slowly lift your legs up, keeping them straight, until your body is parallel to the ground.",
-      "Hold this position for a few seconds, then slowly lower your legs back down to the starting position.",
-      "Repeat for the desired number of repetitions."
+      "Stand with your feet shoulder-width apart and your arms extended straight down by your sides.",
+      "Keeping your back straight and your core engaged, slowly bend your torso to one side, lowering your hand towards your knee.",
+      "Pause for a moment at the bottom, then slowly return to the starting position.",
+      "Repeat on the other side.",
+      "Continue alternating sides for the desired number of repetitions."
     ]
   },
   {
-    "bodyPart": "back",
+    "bodyPart": "waist",
     "equipment": "body weight",
-    "gifUrl": "https://v2.exercisedb.io/image/tRCm-e9N-Ty-vZ",
-    "id": "1405",
-    "name": "back pec stretch",
-    "target": "lats",
+    "gifUrl": "https://v2.exercisedb.io/image/uiZaIABsopabvh",
+    "id": "0003",
+    "name": "air bike",
+    "target": "abs",
+    "secondaryMuscles": [
+      "hip flexors"
+    ],
+    "instructions": [
+      "Lie flat on your back with your hands placed behind your head.",
+      "Lift your legs off the ground and bend your knees at a 90-degree angle.",
+      "Bring your right elbow towards your left knee while simultaneously straightening your right leg.",
+      "Return to the starting position and repeat the movement on the opposite side, bringing your left elbow towards your right knee while straightening your left leg.",
+      "Continue alternating sides in a pedaling motion for the desired number of repetitions."
+    ]
+  },
+  {
+    "bodyPart": "waist",
+    "equipment": "body weight",
+    "gifUrl": "https://v2.exercisedb.io/image/dP11TH5HHYbE7E",
+    "id": "0006",
+    "name": "alternate heel touchers",
+    "target": "abs",
+    "secondaryMuscles": [
+      "obliques"
+    ],
+    "instructions": [
+      "Lie flat on your back with your knees bent and feet flat on the ground.",
+      "Extend your arms straight out to the sides, parallel to the ground.",
+      "Engaging your abs, lift your shoulders off the ground and reach your right hand towards your right heel.",
+      "Return to the starting position and repeat on the left side, reaching your left hand towards your left heel.",
+      "Continue alternating sides for the desired number of repetitions."
+    ]
+  },
+  {
+    "bodyPart": "waist",
+    "equipment": "body weight",
+    "gifUrl": "https://v2.exercisedb.io/image/CBVsROU8Smd9v0",
+    "id": "2355",
+    "name": "arm slingers hanging bent knee legs",
+    "target": "abs",
     "secondaryMuscles": [
       "shoulders",
-      "chest"
+      "back"
     ],
     "instructions": [
-      "Stand tall with your feet shoulder-width apart.",
-      "Extend your arms straight out in front of you, parallel to the ground.",
-      "Cross your arms in front of your body, with your right arm over your left arm.",
-      "Interlock your fingers and rotate your palms away from your body.",
-      "Slowly raise your arms up and away from your body, feeling a stretch in your back and chest.",
-      "Hold the stretch for 15-30 seconds, then release.",
-      "Repeat on the opposite side."
+      "Hang from a pull-up bar with your arms fully extended and your knees bent at a 90-degree angle.",
+      "Engage your core and lift your knees towards your chest, bringing them as close to your elbows as possible.",
+      "Slowly lower your legs back down to the starting position.",
+      "Repeat for the desired number of repetitions."
     ]
   },
   {
-    "bodyPart": "back",
-    "equipment": "band",
-    "gifUrl": "https://v2.exercisedb.io/image/etaxg5p38EhFPV",
-    "id": "0970",
-    "name": "band assisted pull-up",
-    "target": "lats",
+    "bodyPart": "waist",
+    "equipment": "body weight",
+    "gifUrl": "https://v2.exercisedb.io/image/fRWt9keZAeiONn",
+    "id": "2333",
+    "name": "arm slingers hanging straight legs",
+    "target": "abs",
     "secondaryMuscles": [
-      "biceps",
-      "forearms"
+      "shoulders",
+      "back"
     ],
     "instructions": [
-      "Attach the band to a pull-up bar or sturdy anchor point.",
-      "Step onto the band and grip the bar with your palms facing away from you, hands slightly wider than shoulder-width apart.",
-      "Hang with your arms fully extended, keeping your core engaged and your shoulders down and back.",
-      "Pull your body up towards the bar by squeezing your shoulder blades together and driving your elbows down towards your hips.",
-      "Continue pulling until your chin is above the bar, then slowly lower yourself back down to the starting position.",
+      "Hang from a pull-up bar with your arms fully extended and your legs straight down.",
+      "Engage your core and lift your legs up in front of you until they are parallel to the ground.",
+      "Hold for a moment at the top, then slowly lower your legs back down to the starting position.",
       "Repeat for the desired number of repetitions."
+    ]
+  },
+  {
+    "bodyPart": "waist",
+    "equipment": "body weight",
+    "gifUrl": "https://v2.exercisedb.io/image/sxOXWqCd4nFLdr",
+    "id": "3204",
+    "name": "arms overhead full sit-up (male)",
+    "target": "abs",
+    "secondaryMuscles": [
+      "hip flexors",
+      "lower back"
+    ],
+    "instructions": [
+      "Lie flat on your back with your knees bent and feet flat on the ground.",
+      "Extend your arms overhead, keeping them straight.",
+      "Engaging your abs, slowly lift your upper body off the ground, curling forward until your torso is upright.",
+      "Pause for a moment at the top, then slowly lower your upper body back down to the starting position.",
+      "Repeat for the desired number of repetitions."
+    ]
+  },
+  {
+    "bodyPart": "waist",
+    "equipment": "assisted",
+    "gifUrl": "https://v2.exercisedb.io/image/GSVrg3NAgCI49Y",
+    "id": "0011",
+    "name": "assisted hanging knee raise",
+    "target": "abs",
+    "secondaryMuscles": [
+      "hip flexors"
+    ],
+    "instructions": [
+      "Hang from a pull-up bar with your arms fully extended and your palms facing away from you.",
+      "Engage your core muscles and lift your knees towards your chest, bending at the hips and knees.",
+      "Pause for a moment at the top of the movement, squeezing your abs.",
+      "Slowly lower your legs back down to the starting position.",
+      "Repeat for the desired number of repetitions."
+    ]
+  },
+  {
+    "bodyPart": "waist",
+    "equipment": "assisted",
+    "gifUrl": "https://v2.exercisedb.io/image/eGDerpqHfv0fau",
+    "id": "0010",
+    "name": "assisted hanging knee raise with throw down",
+    "target": "abs",
+    "secondaryMuscles": [
+      "hip flexors",
+      "lower back"
+    ],
+    "instructions": [
+      "Hang from a pull-up bar with your arms fully extended and your palms facing away from you.",
+      "Engage your core and lift your knees towards your chest, keeping your legs together.",
+      "Once your knees are at chest level, explosively throw your legs down towards the ground, extending them fully.",
+      "Allow your legs to swing back up and repeat the movement for the desired number of repetitions."
+    ]
+  },
+  {
+    "bodyPart": "waist",
+    "equipment": "assisted",
+    "gifUrl": "https://v2.exercisedb.io/image/QJZXGbVMvgXHUn",
+    "id": "0012",
+    "name": "assisted lying leg raise with lateral throw down",
+    "target": "abs",
+    "secondaryMuscles": [
+      "hip flexors",
+      "obliques"
+    ],
+    "instructions": [
+      "Lie flat on your back with your legs extended and your arms by your sides.",
+      "Place your hands under your glutes for support.",
+      "Engage your abs and lift your legs off the ground, keeping them straight.",
+      "While keeping your legs together, lower them to one side until they are a few inches above the ground.",
+      "Pause for a moment, then lift your legs back to the starting position.",
+      "Repeat the movement to the other side.",
+      "Continue alternating sides for the desired number of repetitions."
     ]
   }
 ]

@@ -30,22 +30,22 @@ function ExBodyPart() {
     const first = bodyPart.split(" ")[0];
     const second = bodyPart.split(" ")[1];
     try {
-      //   const apiUrl = `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${first}${
-      //     second ? `%20${second}` : ""
-      //   }`;
-      //   const response = await axios.get(apiUrl, {
-      //     headers: {
-      //       "X-RapidAPI-Key":
-      //         "ff94c0bc05msh5a7801f49a4f3bep1a28d1jsn2bdd0a1f41af",
-      //       "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
-      //     },
-      //   });
-      //   console.log(response);
-      //   const result = response.data;
-      //   console.log(result);
-      const response = arr;
-      setExercise(response);
+      const apiUrl = `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${first}${
+        second ? `%20${second}` : ""
+      }`;
+      const response = await axios.get(apiUrl, {
+        headers: {
+          "X-RapidAPI-Key": `${process.env.REACT_APP_RAPID_API_KEY}`,
+          "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
+        },
+      });
       console.log(response);
+      const result = response.data;
+      console.log(result);
+      setExercise(result);
+      // const response = arr;
+      // setExercise(response);
+      // console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -154,7 +154,9 @@ function ExBodyPart() {
                     aria-controls="panel4bh-content"
                     id="panel4bh-header"
                   >
-                    <Typography sx={{ width: "50%", flexShrink: 0 }}>
+                    <Typography
+                      sx={{ width: "50%", flexShrink: 0, fontWeight: "bold" }}
+                    >
                       {item.name}
                     </Typography>
                   </AccordionSummary>

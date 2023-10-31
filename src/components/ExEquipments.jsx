@@ -15,7 +15,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExerciseDetail from "./ExerciseDetail";
 
 function ExEquipment() {
-  const [equipment, setBodyPart] = React.useState("");
+  const [equipment, setEquipment] = React.useState("");
   const [exercise, setExercise] = React.useState([]);
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
@@ -23,36 +23,37 @@ function ExEquipment() {
   };
 
   const handleClick = async (event) => {
-    setBodyPart(event.target.value);
+    setEquipment(event.target.value);
   };
   const handleGetExercise = async (event) => {
     event.preventDefault();
     const first = equipment.split(" ")[0];
     const second = equipment.split(" ")[1];
     try {
-      //   const apiUrl = `https://exercisedb.p.rapidapi.com/exercises/equipment/${first}${
-      //     second ? `%20${second}` : ""
-      //   }`;
-      //   const response = await axios.get(apiUrl, {
-      //     headers: {
-      //       "X-RapidAPI-Key":
-      //         "ff94c0bc05msh5a7801f49a4f3bep1a28d1jsn2bdd0a1f41af",
-      //       "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
-      //     },
-      //   });
-      //   console.log(response);
-      //   const result = response.data;
-      //   console.log(result);
-      const response = arr;
-      setExercise(response);
+      const apiUrl = `https://exercisedb.p.rapidapi.com/exercises/equipment/${first}${
+        second ? `%20${second}` : ""
+      }`;
+      const response = await axios.get(apiUrl, {
+        headers: {
+          "X-RapidAPI-Key": `${process.env.REACT_APP_RAPID_API_KEY}`,
+          "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
+        },
+      });
+
       console.log(response);
+      const result = response.data;
+      console.log(result);
+      setExercise(result);
+      // const response = arr;
+      // setExercise(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.log(error);
     }
   };
   return (
     <div style={{ display: "flex" }}>
-      <div style={{ margin: 30, width: 250 }}>
+      <div style={{ margin: 30, width: 300 }}>
         <Accordion
           expanded={expanded === "panel123"}
           onChange={handleChange("panel123")}
@@ -66,63 +67,165 @@ function ExEquipment() {
             >
               <FormControlLabel
                 onClick={handleClick}
-                value="back"
+                value="assisted"
                 control={<Radio />}
-                label="Back"
+                label="Assited"
               />
               <FormControlLabel
                 onClick={handleClick}
-                value="cardio"
+                value="band"
                 control={<Radio />}
-                label="Cardio"
+                label="Band"
               />
               <FormControlLabel
                 onClick={handleClick}
-                value="chest"
+                value="barbell"
                 control={<Radio />}
-                label="Chest"
+                label="Barbell"
               />
               <FormControlLabel
                 onClick={handleClick}
-                value="lower arms"
+                value="body weight"
                 control={<Radio />}
-                label="Lower Arms"
+                label="Body Weight"
               />
               <FormControlLabel
                 onClick={handleClick}
-                value="lower legs"
+                value="bosu ball"
                 control={<Radio />}
-                label="Lower Legs"
+                label="Bosu Ball"
               />
               <FormControlLabel
                 onClick={handleClick}
-                value="neck"
+                value="cable"
                 control={<Radio />}
-                label="Neck"
+                label="Cable"
               />
               <FormControlLabel
                 onClick={handleClick}
-                value="shoulder"
+                value="dumbell"
                 control={<Radio />}
-                label="Shoulder"
+                label="Dumbell"
               />
               <FormControlLabel
                 onClick={handleClick}
-                value="upper arms"
+                value="elliptical machine"
                 control={<Radio />}
-                label="Upper Arms"
+                label="Elliptical Machine"
               />
               <FormControlLabel
                 onClick={handleClick}
-                value="upper legs"
+                value="ez barbell"
                 control={<Radio />}
-                label="Upper Legs"
+                label="Ez Barbell"
               />
               <FormControlLabel
                 onClick={handleClick}
-                value="waist"
+                value="hammer"
                 control={<Radio />}
-                label="Waist"
+                label="Hammer"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="kettlebell"
+                control={<Radio />}
+                label="Kettlebell"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="leverage machine"
+                control={<Radio />}
+                label="Leverage Machine"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="medicine ball"
+                control={<Radio />}
+                label="Medicine Ball"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="olympic barbell"
+                control={<Radio />}
+                label="Olympic Barbell"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="resistance band"
+                control={<Radio />}
+                label="Resistance Band"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="roller"
+                control={<Radio />}
+                label="Roller"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="rope"
+                control={<Radio />}
+                label="Rope"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="skierg machine"
+                control={<Radio />}
+                label="Skierg Machine"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="sled machine"
+                control={<Radio />}
+                label="Sled Machine"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="smit machine"
+                control={<Radio />}
+                label="Smit Machine"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="stability ball"
+                control={<Radio />}
+                label="Stability Ball"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="stationary bike"
+                control={<Radio />}
+                label="Stationary Bike"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="stepmill machine"
+                control={<Radio />}
+                label="Stepmill Machine"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="tire"
+                control={<Radio />}
+                label="Tire"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="trap bar"
+                control={<Radio />}
+                label="Trap Bar"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="weighted"
+                control={<Radio />}
+                label="Weighted"
+              />
+              <FormControlLabel
+                onClick={handleClick}
+                value="wheel roller"
+                control={<Radio />}
+                label="Wheel Roller"
               />
             </RadioGroup>
             <Button onClick={handleGetExercise} variant="contained">
@@ -154,7 +257,9 @@ function ExEquipment() {
                     aria-controls="panel4bh-content"
                     id="panel4bh-header"
                   >
-                    <Typography sx={{ width: "50%", flexShrink: 0 }}>
+                    <Typography
+                      sx={{ width: "50%", flexShrink: 0, fontWeight: "bold" }}
+                    >
                       {item.name}
                     </Typography>
                   </AccordionSummary>
