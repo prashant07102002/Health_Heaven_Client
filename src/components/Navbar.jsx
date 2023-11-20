@@ -65,7 +65,6 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -74,6 +73,9 @@ function ResponsiveAppBar() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              '&:hover': {
+                cursor: 'pointer'
+              }
             }}
             onClick={() => navigate("/")}
           >
@@ -106,23 +108,6 @@ function ResponsiveAppBar() {
             >
               <HomeIcon />
               <Typography sx={{ ml: "0.25rem" }}>Home</Typography>
-            </Box>
-
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                padding: "0.5rem 1rem",
-                "&:hover": {
-                  backgroundColor: "#1b1b1b",
-                  cursor: "pointer",
-                },
-                borderRadius: "0.25rem",
-              }}
-              onClick={() => navigate("/about")}
-            >
-              <EmojiPeopleIcon />
-              <Typography sx={{ ml: "0.25rem" }}>About Us</Typography>
             </Box>
 
             {/* Expanded Services */}
@@ -187,9 +172,10 @@ function ResponsiveAppBar() {
                 },
                 borderRadius: "0.25rem",
               }}
+              onClick={() => navigate('/profile')}
             >
               <PersonIcon />
-              <Typography sx={{ ml: "0.25rem" }}>Account</Typography>
+              <Typography sx={{ ml: "0.25rem" }}>Profile</Typography>
             </Box>
           </Box>
 
@@ -226,7 +212,9 @@ function ResponsiveAppBar() {
                   onClose={handleCloseUserMenu}
                 >
                   <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">Profile</Typography>
+                    <Typography textAlign="center" 
+                      onClick={() => navigate('/profile')}
+                    >Profile</Typography>
                   </MenuItem>
                   <MenuItem onClick={handleLogout}>
                     <Typography textAlign="center">Logout</Typography>

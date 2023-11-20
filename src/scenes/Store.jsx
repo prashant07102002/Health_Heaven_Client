@@ -14,7 +14,8 @@ const Store = () => {
     try {
       console.log(searchQuery);
       const response = await axiosClient.get(`/services/getProducts/${searchQuery}`);
-      console.log(response.products);
+      console.log(response);
+      setProducts(response.result);
     } catch (error) {
       console.log("Error in get products handler function: ", error)
     }
