@@ -7,6 +7,7 @@ import RequireUser from "./components/RequireUser";
 import DietPlanner from "./scenes/DietPlanner";
 import Resources from "./scenes/Resources";
 import Store from "./scenes/Store";
+import Profile from "./scenes/Profile";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/services/dietPlanner" element={<DietPlanner />} />
           <Route path="/services/resources" element={<Resources />} />
           <Route path="/services/store" element={<Store />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
