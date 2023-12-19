@@ -13,11 +13,14 @@ import axios from "axios";
 import arr from "../scenes/testapi";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExerciseDetail from "./ExerciseDetail";
+import { useDispatch } from "react-redux";
+import { showToast } from "../state";
 
 function ExBodyPart() {
   const [bodyPart, setBodyPart] = React.useState("");
   const [exercise, setExercise] = React.useState([]);
   const [expanded, setExpanded] = React.useState(false);
+  const dispatch = useDispatch();
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -48,6 +51,12 @@ function ExBodyPart() {
       // console.log(response);
     } catch (error) {
       console.log(error);
+      dispatch(
+        showToast({
+          type: "Error",
+          message: error.message,
+        })
+      );
     }
   };
   return (
