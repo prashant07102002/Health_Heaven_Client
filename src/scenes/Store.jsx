@@ -4,7 +4,6 @@ import { axiosClient } from "../Utils/axiosClient";
 import Navbar from "../components/Navbar";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, Container, IconButton, InputBase, Paper } from '@mui/material';
-import { Container, IconButton, InputBase, Paper } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { showToast } from "../state";
 
@@ -18,7 +17,6 @@ const Store = () => {
       const response = await axiosClient.get(
         `/services/getProducts/${searchQuery}`
       );
-      const response = await axiosClient.get(`/services/getProducts/${searchQuery}`);
       console.log(response);
       if(response.statusCode === 500) {
         window.alert("Slow Network Connection");
