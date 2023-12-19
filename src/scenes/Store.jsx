@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import Products from '../components/Products'
-import {axiosClient} from '../Utils/axiosClient';
-import Navbar from '../components/Navbar';
+import React, { useEffect, useState } from "react";
+import Products from "../components/Products";
+import { axiosClient } from "../Utils/axiosClient";
+import Navbar from "../components/Navbar";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, Container, IconButton, InputBase, Paper } from '@mui/material';
+import { Container, IconButton, InputBase, Paper } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { showToast } from "../state";
 
 const Store = () => {
-
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-
+  const dispatch = useDispatch();
   const getProducts = async () => {
     try {
       console.log(searchQuery);
+      const response = await axiosClient.get(
+        `/services/getProducts/${searchQuery}`
+      );
       const response = await axiosClient.get(`/services/getProducts/${searchQuery}`);
       console.log(response);
       if(response.statusCode === 500) {
@@ -20,9 +25,15 @@ const Store = () => {
       }
       setProducts(response.result);
     } catch (error) {
-      console.log("Error in get products handler function: ", error)
+      console.log("Error in get products handler function: ", error);
+      dispatch(
+        showToast({
+          type: "Error",
+          message: error.response ? error.response.request.statusText : error,
+        })
+      );
     }
-  }
+  };
 
   return (
     <Box
@@ -79,4 +90,4 @@ const Store = () => {
   )
 }
 
-export default Store
+export default Store;

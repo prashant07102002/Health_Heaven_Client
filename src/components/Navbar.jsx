@@ -18,7 +18,7 @@ import { Button, Divider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { KEY_ACCESS_TOKEN, removeItem } from "../Utils/localStorage";
 import { useDispatch, useSelector } from "react-redux";
-import { setLogout } from "../state";
+import { setLogout, showToast } from "../state";
 import { axiosClient } from "../Utils/axiosClient";
 
 function ResponsiveAppBar() {
@@ -50,10 +50,28 @@ function ResponsiveAppBar() {
 
   const handleLogout = async () => {
     removeItem(KEY_ACCESS_TOKEN);
-    const response = await axiosClient.get("/auth/logout");
-    console.log(response);
-    dispatch(setLogout());
-    setLoggedInUser(null);
+    try {
+      const response = await axiosClient.get("/auth/logout");
+      console.log(response);
+      dispatch(setLogout());
+      setLoggedInUser(null);
+      if (response.status === "Ok") {
+        dispatch(
+          showToast({
+            type: "Success",
+            message: response.result,
+          })
+        );
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        showToast({
+          type: "Error",
+          message: error,
+        })
+      );
+    }
   };
 
   return (

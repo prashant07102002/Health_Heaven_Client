@@ -17,6 +17,7 @@ axiosClient.interceptors.response.use(
     async (response) => {
         // console.log("response is ", response);
         const data = response.data;
+        console.log(data);
         if (data.status === 'Ok') {
             console.log("Every thing is ok no need to call refresh api, returning data")
             return data;
