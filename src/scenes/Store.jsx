@@ -3,7 +3,7 @@ import Products from '../components/Products'
 import {axiosClient} from '../Utils/axiosClient';
 import Navbar from '../components/Navbar';
 import SearchIcon from "@mui/icons-material/Search";
-import { Container, IconButton, InputBase, Paper } from '@mui/material';
+import { Box, Container, IconButton, InputBase, Paper } from '@mui/material';
 
 const Store = () => {
 
@@ -15,6 +15,9 @@ const Store = () => {
       console.log(searchQuery);
       const response = await axiosClient.get(`/services/getProducts/${searchQuery}`);
       console.log(response);
+      if(response.statusCode === 500) {
+        window.alert("Slow Network Connection");
+      }
       setProducts(response.result);
     } catch (error) {
       console.log("Error in get products handler function: ", error)
@@ -22,7 +25,12 @@ const Store = () => {
   }
 
   return (
-    <div>
+    <Box
+    sx={{
+      backgroundColor: "rgb(255, 245, 230)",
+      minHeight: '100%',
+    }}
+    >
       <Navbar />
 
       <Container
@@ -67,7 +75,7 @@ const Store = () => {
       <Products 
         products={products}
       />
-    </div>
+    </Box>
   )
 }
 

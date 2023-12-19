@@ -55,6 +55,7 @@ const GymSearch = () => {
         }
       );
       const { results } = await res.json();
+      console.log(results);
       setGymList(results);
       // const data = await res.json();
       console.log(results);
@@ -92,7 +93,12 @@ const GymSearch = () => {
   };
 
   return (
-    <>
+    <Box
+     sx={{
+      backgroundColor: "rgb(255, 245, 230)",
+      minHeight: '100%'
+     }}
+    >
       <Navbar />
 
       <Container
@@ -239,7 +245,7 @@ const GymSearch = () => {
             })
           : null}
       </Container>
-    </>
+    </Box>
   );
 };
 
