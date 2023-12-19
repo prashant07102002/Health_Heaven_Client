@@ -19,6 +19,8 @@ import axios from "axios";
 import Meal from "../components/Meal";
 import ResponsiveAppBar from "../components/Navbar";
 import CalorieCalculator from "../components/CalorieCalculator";
+import { useDispatch } from "react-redux";
+import { showToast } from "../state";
 
 const style = {
   position: "absolute",
@@ -42,6 +44,7 @@ function DietPlanner() {
   const [calorie, setCalorie] = React.useState(2000);
   const [checked, setChecked] = React.useState(false);
   const [meal, setMeal] = React.useState([]);
+  const dispatch = useDispatch();
   const [nutrient, setNutrient] = React.useState({
     calories: 0,
     protien: 0,
@@ -83,6 +86,12 @@ function DietPlanner() {
       });
     } catch (error) {
       console.log(error);
+      dispatch(
+        showToast({
+          type: "Error",
+          message: error.message,
+        })
+      );
     }
   };
 

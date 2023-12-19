@@ -18,6 +18,8 @@ import gymImage from "../Assets/gym_demo_img.jpg";
 import DirectionsIcon from "@mui/icons-material/Directions";
 import StarIcon from "@mui/icons-material/Star";
 import GpsFixedIcon from "@mui/icons-material/GpsFixed";
+import { useDispatch } from "react-redux";
+import { showToast } from "../state";
 
 const labels = {
   0: "Useless",
@@ -31,6 +33,7 @@ const labels = {
 const GymSearch = () => {
   const [gymList, setGymList] = useState([]);
   const [address, setAddress] = useState("");
+  const dispatch = useDispatch();
 
   const getMapsLink = (str) => {
     let link = "";
@@ -60,6 +63,12 @@ const GymSearch = () => {
       console.log(results);
     } catch (error) {
       console.log(error);
+      dispatch(
+        showToast({
+          type: "Error",
+          message: error.message,
+        })
+      );
     }
   };
 

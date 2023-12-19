@@ -13,11 +13,14 @@ import axios from "axios";
 import arr from "../scenes/testapi";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExerciseDetail from "./ExerciseDetail";
+import { useDispatch } from "react-redux";
+import { showToast } from "../state";
 
 function ExEquipment() {
   const [equipment, setEquipment] = React.useState("");
   const [exercise, setExercise] = React.useState([]);
   const [expanded, setExpanded] = React.useState(false);
+  const dispatch = useDispatch();
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -49,6 +52,12 @@ function ExEquipment() {
       // console.log(response.data);
     } catch (error) {
       console.log(error);
+      dispatch(
+        showToast({
+          type: "Error",
+          message: error.message,
+        })
+      );
     }
   };
   return (

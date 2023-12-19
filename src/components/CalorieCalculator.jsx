@@ -17,8 +17,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { showToast } from "../state";
 function CalorieCalculator({ setCalorie, handleClose }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setformData] = useState({
     height: "",
     weight: "",
@@ -78,8 +80,7 @@ function CalorieCalculator({ setCalorie, handleClose }) {
       try {
         const response = await axios.get(apiUrl, {
           headers: {
-            "X-RapidAPI-Key":
-              "ff94c0bc05msh5a7801f49a4f3bep1a28d1jsn2bdd0a1f41af",
+            "X-RapidAPI-Key": `${process.env.REACT_APP_RAPID_API_KEY}`,
             "X-RapidAPI-Host": "fitness-calculator.p.rapidapi.com",
           },
         });
@@ -96,6 +97,14 @@ function CalorieCalculator({ setCalorie, handleClose }) {
         // console.log("value of you bmr is : ",rowData.bmr);
       } catch (error) {
         console.log(error);
+        dispatch(
+          showToast({
+            type: "Error",
+            message: error?.response?.data
+              ? error.response.data.request_result
+              : error.message,
+          })
+        );
       }
     }
   };

@@ -15,6 +15,8 @@ import { axiosClient } from "../Utils/axiosClient";
 import { Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { showToast } from "../state";
 
 const defaultTheme = createTheme();
 
@@ -24,7 +26,7 @@ export default function SignUp() {
   const [generatedOtp, setGeneratedOtp] = React.useState(0);
   const [enteredOtp, setEnteredOtp] = React.useState("");
   const [password, setPassword] = React.useState("");
-
+  const dispatch = useDispatch();
   const handleChange = async (event) => {
     event.preventDefault();
     if (event.target.name === "email") setEmail(event.target.value);
@@ -69,9 +71,23 @@ export default function SignUp() {
         }
       );
       console.log("response from sign up ", response);
+      if (response.status === "Ok") {
+        dispatch(
+          showToast({
+            type: "Success",
+            message: response.result,
+          })
+        );
+      }
       navigate("/signin");
     } catch (e) {
       console.log("the error is ", e);
+      dispatch(
+        showToast({
+          type: "Error",
+          message: e,
+        })
+      );
     }
   };
 

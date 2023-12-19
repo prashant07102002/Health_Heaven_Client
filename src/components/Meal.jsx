@@ -1,15 +1,28 @@
 import { Button, ImageListItem, Paper, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { showToast } from "../state";
 
 function Meal(props) {
   const [imgUrl, setImageUrl] = useState("");
   const recipeUrl = props.mealno.sourceUrl;
+  const dispatch = useDispatch();
   const fetchData = async () => {
     const apiUrl = `https://api.spoonacular.com/recipes/${props.mealno.id}/information?apiKey=${process.env.REACT_APP_SPOONACULAR_API_KEY}&includeNutrition=false`;
-    const response = await axios.get(apiUrl);
-    console.log(response.data.image);
-    setImageUrl(response.data.image);
+    try {
+      const response = await axios.get(apiUrl);
+      console.log(response.data.image);
+      setImageUrl(response.data.image);
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        showToast({
+          type: "Error",
+          message: error.message,
+        })
+      );
+    }
   };
   useEffect(
     () => {
@@ -18,6 +31,7 @@ function Meal(props) {
     [props.mealno.id],
     fetchData()
   );
+
   const paperStyle = {
     width: "600px",
     height: "150px",
