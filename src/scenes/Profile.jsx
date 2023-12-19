@@ -107,7 +107,12 @@ const Profile = () => {
     };
 
   return (
-    <>
+    <Box
+      sx={{
+          backgroundColor: "rgb(255, 245, 230)",
+          minHeight: '100%'
+      }}
+    >
     <Navbar />
     <Box
       sx={{
@@ -467,7 +472,7 @@ const Profile = () => {
             
         </Paper>
     </Box>
-    </>
+    </Box>
   )
 }
 
