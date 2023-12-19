@@ -152,20 +152,6 @@ const Profile = () => {
                 <Typography>Body Info</Typography>
             </Box>
             <Divider />
-            <Box
-            sx={{
-                p: '1rem',
-                backgroundColor: `${pageType === 'account' ? '#d4d4d4' : 'white'}`,
-                '&:hover': {
-                    backgroundColor: '#d4d4d4',
-                    cursor: 'pointer'
-                }
-              }}
-              onClick = {() => setPageType('account')}
-            >
-                <Typography>Account Settings</Typography>
-            </Box>
-            <Divider />
         </Paper>
         
         <Paper elevation={3} 
