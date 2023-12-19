@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { showToast } from "./state";
+import Profile from "./scenes/Profile";
 
 function App() {
   const toastData = useSelector((store) => store.toastData);
@@ -45,6 +46,7 @@ function App() {
           <Route path="/services/dietPlanner" element={<DietPlanner />} />
           <Route path="/services/resources" element={<Resources />} />
           <Route path="/services/store" element={<Store />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />

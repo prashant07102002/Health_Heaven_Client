@@ -17,6 +17,7 @@ const Store = () => {
       const response = await axiosClient.get(
         `/services/getProducts/${searchQuery}`
       );
+      const response = await axiosClient.get(`/services/getProducts/${searchQuery}`);
       console.log(response);
       setProducts(response.result);
     } catch (error) {
